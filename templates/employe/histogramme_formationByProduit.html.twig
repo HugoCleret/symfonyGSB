@@ -1,0 +1,55 @@
+
+{% extends 'base.html.twig'%}
+{% block body %}
+
+<div style="font-weight: bold;">Vous êtes dans la liste des formations du doliprane :</div> </br></br>
+{%if ensFormationsByProduit|length >= 0 %}
+<tr>
+    <td> Il y a {{ ensFormationsByProduit|length }} formations pour le doliprane </td>
+</tr></br></br>
+{% endif %}
+{% if (message) %}
+    {{ message }}
+{%endif%}
+
+<button> <a href="{{path('app_AccueilEmp')}}">Retour aux formations</a>  </button>
+</br></br>
+
+<div id="conteneur" style = "display: flex; flex-wrap: wrap; justify-content: space-around;">
+{%for formation in ensFormationsByProduit%}
+<div name = "element" margin="10,10,10,10" >
+    
+<table border="1" margin="10,10,10,10" class="table table-bordered table-striped table-grey" style="background-color: white; border-collapse: separate; border-radius: 7px; padding: 15px; ">
+    <thead>
+        <tr>
+            <th colspan=2 scope="col"> <b>Id de la formation : {{ formation.id }}</b> </th>
+        </tr>    
+    <thead>
+    <tbody>
+        <tr>
+            <td scope="row"> id produit </td> 
+            <td> {{ formation.Produit.libelle }} </td>
+        </tr>
+        <tr>
+            <td scope="row"> date debut  </td>
+            <td> {{ formation.dateDebut|date("m/d/Y") }}  </td>
+        </tr>
+        <tr>                   
+            <td scope="row"> nb heure  </td>
+            <td> {{ formation.nbreHeures }}  </td>
+        </tr>
+        <tr> 
+            <td scope="row"> departement  </td>
+            <td> {{ formation.departement }}  </td>
+        </tr>
+        <tr> 
+            <td scope="row"> ville  </td>
+            <td> {{ formation.ville }} </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+{% endfor %}
+</div>
+{% endblock %}

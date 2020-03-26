@@ -1,0 +1,67 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+Vous êtes dans la liste des formations: </br></br>
+{% if (message) %}
+    {{ message }}
+{%endif%}
+
+<button > <a href="{{path('app_inscriptions_visiteur')}}">Voir vos inscriptions</a>  </button>
+
+</br><hr>
+
+<div id="conteneur" style = "display: flex; flex-wrap: wrap; justify-content: space-around;">
+{%for formation in ensFormations%}
+<div name = "element" margin="10,10,10,10" >
+<table border="1" margin="10,10,10,10" class="table table-bordered table-striped table-grey" style="background-color: white; border-collapse: separate; border-radius: 7px; padding: 15px; ">
+    <thead>
+        <tr>
+            <th colspan=2> <b>Numéro formation : {{ formation.id }}</b> </th>
+        </tr>    
+    <thead>
+    <tbody>
+        <tr>
+            <td> id produit </td> 
+            <td> {{  formation.Produit.libelle }} </td>
+        </tr>
+        <tr>
+            <td> date debut  </td>
+            <td> {{ formation.dateDebut|date("m/d/Y") }}  </td>
+        </tr>
+        <tr>                   
+            <td> nb heure  </td>
+            <td> {{ formation.nbreHeures }}  </td>
+        </tr>
+        <tr> 
+            <td> departement  </td>
+            <td> {{ formation.departement }}  </td>
+        </tr>
+        <tr> 
+            <td> ville  </td>
+            <td> {{ formation.ville }} </td>
+        </tr>
+        <tr> 
+            <td> repas  </td>
+            <td> {{ formation.repas }} </td>
+        </tr>
+        <tr> 
+            <td colspan=2 align="center"> <a href="{{path('app_InscriptionAUneFormation',{'id': formation.id})}}">S'inscrire à cette formation</a>  
+        </tr>    
+    </tbody>
+</table>
+</div>
+        {% for message in app.flashes('success') %}
+           <script>alert("Vous êtes inscrit à la formation")</script>
+        {% endfor %}
+
+        {% for message in app.flashes('dejaInscrit') %}
+        <div class="alert alert-warning" role="alert">
+           <script>alert("Vous êtes déjà inscrit à la formation")</script>
+        </div>
+        {% endfor %}
+
+
+{% endfor %}
+
+</div>
+{% endblock %}
+

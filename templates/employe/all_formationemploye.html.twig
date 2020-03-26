@@ -1,0 +1,65 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+
+<div style="font-weight: bold;">Vous êtes dans la liste des formations: </div></br></br>
+{% if (message) %}
+    {{ message }}
+{%endif%}
+<button> <a href="{{path('app_AjoutFormation')}}">Ajouter Formation</a>  </button>
+
+<button> <a href="{{path('app_GererInscription')}}">Gérer les inscriptions</a>  </button>
+
+<button> <a href="{{path('app_formation_moisProchain')}}">Voir les formations du mois prochain</a>  </button>
+
+<button> <a href="{{path('app_formationsParProduitHisto',{'id': 1})}}">Voir les formations selon un produit</a>  </button>
+
+
+
+
+</br><hr>
+
+<div id="conteneur" style = "display: flex; flex-wrap: wrap; justify-content: space-around;">
+{%for formation in ensFormations%}
+<div name = "element" margin="10,10,10,10" >
+<table border="1" margin="10,10,10,10"  class="table table-bordered table-striped table-grey" style="background-color: white; border-collapse: separate; border-radius: 7px; padding: 15px; ">
+    <thead>
+        <tr>
+            <th scope="col" colspan=2> <b>Id de la formation : {{ formation.id }}</b> </th>
+        </tr>    
+    <thead>
+    <tbody>
+        <tr>
+            <td> id produit </td> 
+            <td> {{ formation.Produit.libelle }} </td>
+        </tr>
+        <tr>
+            <td scope="row"> date debut  </td>
+            <td> {{ formation.dateDebut|date("m/d/Y") }}  </td>
+        </tr>
+        <tr>                   
+            <td> nb heure  </td>
+            <td> {{ formation.nbreHeures }}  </td>
+        </tr>
+        <tr> 
+            <td> departement  </td>
+            <td> {{ formation.departement }}  </td>
+        </tr>
+        <tr> 
+            <td> ville  </td>
+            <td> {{ formation.ville }} </td>
+        </tr>
+        <tr> 
+            <td colspan=2 align="center"> <a href="{{path('app_SupprFormation',{'id': formation.id})}}">Suppression</a>  </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+{% for message in app.flashes('suppr') %}
+    <script>alert("Impossible de supprimer la formation car des visiteurs y sont inscrits")</script>
+{% endfor %}
+
+{% endfor %}
+
+</div>
+{% endblock %}
+        

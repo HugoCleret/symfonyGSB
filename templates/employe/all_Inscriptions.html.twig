@@ -1,0 +1,59 @@
+{% extends 'base.html.twig'%}
+{% block body %}
+
+<div style="font-weight: bold;">Vous êtes dans la liste des inscriptions: </div></br></br>
+{% if (message) %}
+    {{ message }}
+{%endif%}
+<button> <a href="{{path('app_AccueilEmp')}}">Retour</a>  </button>
+
+</br><hr>
+
+<div id="conteneur" style = "display: flex; flex-wrap: wrap; justify-content: space-around;">
+{%for inscription in ensInscriptions%}
+<div name = "element" margin="10,10,10,10" >
+<table border="1" margin="10,10,10,10" class="table table-bordered table-striped table-grey" style="background-color: white; border-collapse: separate; border-radius: 7px; padding: 15px; ">
+    <thead>
+        <tr>
+            <th colspan=2> <b>Id de la formation : {{ inscription.formation.id }}</b> </th>
+        </tr>    
+    <thead>
+    <tbody>
+        <tr>
+            <td> Id du visiteur : </td> 
+            <td> {{ inscription.visiteur.id }} </td>
+        </tr>
+        <tr>
+            <td> Nom :  </td>
+            <td> {{ inscription.visiteur.nom }}  </td>
+        </tr>
+        <tr>                   
+            <td>  Prénom : </td>
+            <td> {{ inscription.visiteur.prenom }}  </td>
+        </tr>
+        <tr> 
+            <td> Département :  </td>
+            <td> {{ inscription.formation.departement }}  </td>
+        </tr>
+        <tr> 
+            <td> Produit :  </td>
+            <td> {{ inscription.formation.produit.libelle }} </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+            <button><a href="{{path('app_AccepterInscription',{'id':inscription.id})}}">Accepter</a></button>
+            &nbsp;&nbsp;
+            <button><a href="{{path('app_RefuserInscription',{'id':inscription.id})}}">Refuser</a></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+{% for message in app.flashes('success') %}
+           <script>alert("Vous avez Accepter l'inscription de ")</script>
+        {% endfor %}
+        {% for message in app.flashes('echec') %}
+           <script>alert("Vous avez refuser l'inscription de ")</script>
+        {% endfor %}
+{% endfor %}
+{% endblock %}

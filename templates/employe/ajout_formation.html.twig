@@ -1,0 +1,13 @@
+{% extends 'base.html.twig'%}
+
+{% form_theme form 'form_table_layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}    
+
+{% block body %}
+<div style="font-weight: bold;">Ajoutez une formation </div></br></br>
+
+<button> <a href="{{path('app_AccueilEmp')}}">Retour à la liste des formations</a>  </button>
+
+    {{form(form)}}
+
+{% endblock %}

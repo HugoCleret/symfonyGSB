@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+        
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <img src="https://baptiste-bisson.com/wp-content/uploads/2016/04/Logo-gsb.png" width="150" ></img>
+
+    </head>
+    <center>
+        <body style="background-color:#538EF7;">
+            {% block body %}{% endblock %}
+            {% block javascripts %}{% endblock %}
+        </body>
+    </center>  
+   
+</html>
